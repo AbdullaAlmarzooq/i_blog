@@ -1,7 +1,16 @@
+import { useState } from 'react';
+
 const Home = () => {
+    const [blog, setBlog] = useState([
+        { title: 'The Hidden Benefits of a Digital Detox', body: 'In our hyper-connected world, stepping away from screens can feel impossible. But even a short digital detox offers surprising benefits. Imagine clearer thoughts, improved sleep, and a renewed appreciation for your surroundings. It is not about abandoning technology forever, but about creating intentional breaks to recharge your mind and spirit. Try it for a day, and you might just discover a calmer, more present you.', author: 'Tech-Free Tanya', id: 1 },
+        { title: 'Quick & Easy Weeknight Dinners: Pasta Perfection', body: 'Tired after a long day and dreading cooking? Pasta is your weeknight savior! A simple cacio e pepe, a quick pesto toss with cherry tomatoes, or even just butter and parmesan can be on the table in minutes. Don not overthink it. Focus on fresh ingredients and simple preparations. You deserve a delicious, no-fuss meal.', author: 'Culinary Kate', id: 2 },
+        { title: 'The Power of a Morning Routine', body: 'You don not need to wake up at 5 AM to have a powerful morning routine. Even 15 minutes dedicated to yourself can set a positive tone for the day. Whether it is five minutes of meditation, sipping your coffee in silence, or jotting down your priorities, establishing a small ritual can significantly boost your productivity and well-being. Start small, be consistent, and watch the magic happen.', author: 'Mindful Mike', id: 3 }
+    ]);
+
     return ( 
         <div className="Home">
             <h2>Home Page</h2>
+
         </div>
 
      );

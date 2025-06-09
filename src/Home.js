@@ -2,32 +2,33 @@ import { useState, useEffect } from 'react';
 import BlogList from './BlogList';
 
 const Home = () => {
-    const [blogs, setBlogs] = useState([
-        { title: 'The Hidden Benefits of a Digital Detox', body: 'In our hyper-connected world, stepping away from screens can feel impossible. But even a short digital detox offers surprising benefits. Imagine clearer thoughts, improved sleep, and a renewed appreciation for your surroundings. It is not about abandoning technology forever, but about creating intentional breaks to recharge your mind and spirit. Try it for a day, and you might just discover a calmer, more present you.', author: 'Tech-Free Tanya', id: 1 },
-        { title: 'Quick & Easy Weeknight Dinners: Pasta Perfection', body: 'Tired after a long day and dreading cooking? Pasta is your weeknight savior! A simple cacio e pepe, a quick pesto toss with cherry tomatoes, or even just butter and parmesan can be on the table in minutes. Don not overthink it. Focus on fresh ingredients and simple preparations. You deserve a delicious, no-fuss meal.', author: 'Culinary Kate', id: 2 },
-        { title: 'The Power of a Morning Routine', body: 'You don not need to wake up at 5 AM to have a powerful morning routine. Even 15 minutes dedicated to yourself can set a positive tone for the day. Whether it is five minutes of meditation, sipping your coffee in silence, or jotting down your priorities, establishing a small ritual can significantly boost your productivity and well-being. Start small, be consistent, and watch the magic happen.', author: 'Mindful Mike', id: 3 }
-    ]);
+    const [blogs, setBlogs] = useState(null);
 
     const [name, setName] = useState('Mindful Mike');
 
-    const handleDelete = (id) => {
-        const newBlogs = blogs.filter((blog) => blog.id !== id);
-        setBlogs(newBlogs);
-    };
 
     useEffect(() => {   
-        console.log('Blogs fetched or updated');
-        console.log(name);
-    }, [name]);
+
+        fetch('http://localhost:8000/blogs')
+            .then(res => {
+                if (!res.ok) {
+                    throw Error('Could not fetch the data for that resource');
+                }
+                return res.json();
+            })
+            .then(data => {
+                setBlogs(data);
+            })
+            .catch(err => {
+                console.error(err.message);
+            });
+    },[]);
 
     return ( 
         <div className="Home">
             <h2>Home Page</h2>
             <p>Welcome to our blog! Here you will find a collection of insightful articles on various topics.</p>
-            <BlogList blogs={blogs} title="List of all blogs" handleDelete={handleDelete} />
-            <button onClick={() => setName('Abdulla Almarzooq')}>Change Name</button>
-            <p>Current Author: {name}</p>
-
+            {blogs && <BlogList blogs={blogs} title="List of all blogs" />}
         </div>
     );
 };

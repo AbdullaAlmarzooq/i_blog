@@ -5,7 +5,7 @@ const BlogList = ({ blogs, title, handleDelete }) => {
                 {blogs.map((blog) => (
                 <div className="blog-preview" key={blog.id}>
                     <h2>{blog.title}</h2>
-                    <p>{blog.body.substring(0, 100)}...</p>
+                    <p>{blog.body.substring(0, 200)}...</p>
                     <p>Written by {blog.author}</p>
                 </div>
             
